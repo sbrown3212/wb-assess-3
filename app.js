@@ -60,7 +60,6 @@ const OTHER_FOSSILS = [
   },
 ];
 
-// TODO: Replace this comment with your code
 // Renders homepage.html, or redirects to /top-fossils if session.name exists
 app.get('/', (request, response) => {
   if (!request.session.name) {
@@ -74,7 +73,6 @@ app.get('/', (request, response) => {
 
 // Saves user input from form on homepage to session
 app.get('/get-name', (request, response) => {
-  // console.log(`name:`, request.query.name);
   request.session.name = request.query.name;
   response.redirect('/top-fossils')
 })
@@ -95,15 +93,9 @@ app.get('/top-fossils', (request, response) => {
 
 // Increment num_likes of fossil from form on top-fossils.html
 app.post('/like-fossil', (request, response) => {
-  console.log();
-  console.log(`current likes:`, MOST_LIKED_FOSSILS[request.body.fossilKey].num_likes);
-
-  const likedFossilKey = request.body.fossilKey
-  MOST_LIKED_FOSSILS[likedFossilKey].num_likes += 1;
-
-  console.log(`updated likes:`, MOST_LIKED_FOSSILS[request.body.fossilKey].num_likes);
-  console.log();
+  MOST_LIKED_FOSSILS[request.body.fossilKey].num_likes += 1;
   
+  // render thank-you.html passing the name saved in session
   response.render('thank-you.html', {
     name: request.session.name,
   })
