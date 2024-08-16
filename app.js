@@ -61,6 +61,19 @@ const OTHER_FOSSILS = [
 ];
 
 // TODO: Replace this comment with your code
+// Renders homepage.html
+app.get('/', (request, response) => {
+  response.render('homepage.html');
+})
+
+// Saves user input from form on homepage to session
+app.get('/get-name', (request, response) => {
+  // console.log(`name:`, request.query.name);
+  request.session.name = request.query.name;
+  response.redirect('/top-fossils')
+})
+
+// Renders top-fossils.html and sends MOST_LIKED_FOSSILS object
 app.get('/top-fossils', (request, response) => {
   response.render('top-fossils.html', {MOST_LIKED_FOSSILS});
 });
