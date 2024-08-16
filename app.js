@@ -93,6 +93,22 @@ app.get('/top-fossils', (request, response) => {
   };
 });
 
+// Increment num_likes of fossil from form on top-fossils.html
+app.post('/like-fossil', (request, response) => {
+  console.log();
+  console.log(`current likes:`, MOST_LIKED_FOSSILS[request.body.fossilKey].num_likes);
+
+  const likedFossilKey = request.body.fossilKey
+  MOST_LIKED_FOSSILS[likedFossilKey].num_likes += 1;
+
+  console.log(`updated likes:`, MOST_LIKED_FOSSILS[request.body.fossilKey].num_likes);
+  console.log();
+  
+  response.render('thank-you.html', {
+    name: request.session.name,
+  })
+})
+
 app.get('/random-fossil.json', (req, res) => {
   const randomFossil = lodash.sample(OTHER_FOSSILS);
   res.json(randomFossil);

@@ -12,5 +12,15 @@
     <img src="{{ value.img }}">
   </div>
   {% endfor %}
-  
+
+  <h1>Like a Fossil</h1>
+  <form action="/like-fossil" method="post">
+    <select name="fossilKey" id="fossil">
+      {% for key, value in MOST_LIKED_FOSSILS %}
+      <option value="{{ key }}">{{ value.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+
 {% endblock %}
