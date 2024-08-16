@@ -61,10 +61,16 @@ const OTHER_FOSSILS = [
 ];
 
 // TODO: Replace this comment with your code
-// Renders homepage.html
+// Renders homepage.html, or redirects to /top-fossils if session.name exists
 app.get('/', (request, response) => {
-  response.render('homepage.html');
-})
+  if (!request.session.name) {
+    // If name is not saved to session, got to home page
+    response.render('homepage.html');
+  } else {
+    // If name exists in session, redirect to /top-fossils end point
+    response.redirect('/top-fossils');
+  };
+});
 
 // Saves user input from form on homepage to session
 app.get('/get-name', (request, response) => {
@@ -76,9 +82,15 @@ app.get('/get-name', (request, response) => {
 // Renders top-fossils.html and sends MOST_LIKED_FOSSILS object and name from session
 app.get('/top-fossils', (request, response) => {
   const name = request.session.name;
-  response.render('top-fossils.html', {
-    MOST_LIKED_FOSSILS,
-    name, });
+  if (!request.session.name) {
+    // If a name key is not in session data, redirect to homepage
+    response.redirect('/');
+  } else {
+    // If name key is in session data, render top-fossils.html
+    response.render('top-fossils.html', {
+      MOST_LIKED_FOSSILS,
+      name, });
+  };
 });
 
 app.get('/random-fossil.json', (req, res) => {
