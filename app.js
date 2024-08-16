@@ -61,6 +61,9 @@ const OTHER_FOSSILS = [
 ];
 
 // TODO: Replace this comment with your code
+app.get('/top-fossils', (request, response) => {
+  response.render('top-fossils.html', {MOST_LIKED_FOSSILS});
+});
 
 app.get('/random-fossil.json', (req, res) => {
   const randomFossil = lodash.sample(OTHER_FOSSILS);
