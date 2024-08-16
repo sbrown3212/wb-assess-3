@@ -73,9 +73,12 @@ app.get('/get-name', (request, response) => {
   response.redirect('/top-fossils')
 })
 
-// Renders top-fossils.html and sends MOST_LIKED_FOSSILS object
+// Renders top-fossils.html and sends MOST_LIKED_FOSSILS object and name from session
 app.get('/top-fossils', (request, response) => {
-  response.render('top-fossils.html', {MOST_LIKED_FOSSILS});
+  const name = request.session.name;
+  response.render('top-fossils.html', {
+    MOST_LIKED_FOSSILS,
+    name, });
 });
 
 app.get('/random-fossil.json', (req, res) => {

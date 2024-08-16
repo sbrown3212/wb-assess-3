@@ -7,10 +7,10 @@
     <title>Most Liked Fossils</title>
   </head>
   <body>
-    <h1>Hi, </h1>
+    <h1>Welcome, {{ name }}</h1>
     {% for key, value in MOST_LIKED_FOSSILS %}
     <div>
-      <h3>{{ value.name }}</h3>
+      <h3>{{ name }}, this is a {{ value.name }}</h3>
       <h2>Liked {{ value.num_likes }} times</h2>
       <img src="{{ value.img }}">
     </div>
